@@ -738,15 +738,15 @@ onMounted(async () => {
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       @click.self="closeInvestmentProductDetail"
     >
-      <div class="w-full max-w-3xl rounded-lg border border-border bg-card p-6 text-card-foreground shadow-lg">
+      <div class="flex max-h-[90vh] w-full max-w-3xl flex-col rounded-lg border border-border bg-card p-6 text-card-foreground shadow-lg">
         <div class="mb-4 flex items-center justify-between">
           <h3 class="text-lg font-semibold">
             {{ viewingInvestmentProductDetail.investmentProduct.name }}
           </h3>
           <Button variant="outline" size="sm" @click="closeInvestmentProductDetail">閉じる</Button>
         </div>
-        <Button class="mb-3" size="sm" @click="openAddAmountModal">取得量登録</Button>
-        <div class="overflow-auto rounded-lg border border-border">
+        <Button class="mb-3 self-start" size="sm" @click="openAddAmountModal">取得量登録</Button>
+        <div class="min-h-0 flex-1 overflow-auto rounded-lg border border-border">
           <table class="w-full text-sm">
             <thead class="bg-muted text-muted-foreground">
               <tr>

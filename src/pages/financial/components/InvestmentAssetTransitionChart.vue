@@ -70,6 +70,8 @@ function buildSeries(): Highcharts.SeriesOptionsType[] {
 
   // 対象日付一覧
   const dates = firstRates.filter((x) => isTargetDate(x.date, unitValue)).map((x) => x.date)
+  // 対象日付の高速判定用 Set（includes の線形探索を O(1) 化する）
+  const targetDateSet = new Set(dates)
 
   /** 種別に応じたレート係数を返す */
   const rateOf = (r: { rate: number; averageRate: number }): number =>
@@ -98,10 +100,10 @@ function buildSeries(): Highcharts.SeriesOptionsType[] {
           started = true
           return true
         })
-        .filter((r) => dates.includes(r.date))
+        .filter((r) => targetDateSet.has(r.date))
         .map((r) => r.amount * rateOf(r) * r.currencyRate)
       const firstValid =
-        product.dailyRates.find((r) => dates.includes(r.date) && r.rate !== 0)?.date ?? dates[0]
+        product.dailyRates.find((r) => targetDateSet.has(r.date) && r.rate !== 0)?.date ?? dates[0]
       return {
         type: 'area',
         name: product.name,
@@ -114,17 +116,17 @@ function buildSeries(): Highcharts.SeriesOptionsType[] {
       } as Highcharts.SeriesAreaOptions
     })
 
-  // 合計ライン
+  // 合計ライン（商品×dailyRates を 1 パスで日付別に集計する）
+  const totalByDate = new Map<string, number>()
+  for (const x of products) {
+    for (const r of x.dailyRates) {
+      if (targetDateSet.has(r.date)) {
+        totalByDate.set(r.date, (totalByDate.get(r.date) ?? 0) + rateOf(r) * r.amount * r.currencyRate)
+      }
+    }
+  }
   const totalData = dates
-    .map((date) =>
-      products.reduce((sum, x) => {
-        const rate = x.dailyRates.find((dr) => dr.date === date)
-        if (!rate) {
-          return sum
-        }
-        return sum + rateOf(rate) * rate.amount * rate.currencyRate
-      }, 0),
-    )
+    .map((date) => totalByDate.get(date) ?? 0)
     .map((value, index) =>
       index !== dates.length - 1
         ? value
