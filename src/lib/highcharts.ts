@@ -1,4 +1,11 @@
 import Highcharts from 'highcharts'
+import HighchartsMore from 'highcharts/highcharts-more'
+import HighchartsSunburst from 'highcharts/modules/sunburst'
+
+// boxplot / columnrange 等の追加チャートタイプを有効化する（Angular 版 highcharts-more 相当）
+HighchartsMore(Highcharts)
+// sunburst（支出割合・投資ポートフォリオの円階層チャート）を有効化する
+HighchartsSunburst(Highcharts)
 
 /** Highcharts の既定カラーパレット（Angular 版から移植） */
 export const highChartsColors: string[] = [

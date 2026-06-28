@@ -11,5 +11,14 @@ export default defineConfig({
     },
     server: {
         port: 4200,
+        proxy: {
+            // 開発時は API を Vite 経由でバックエンドへプロキシする。
+            // secure: false で自己署名（開発用）証明書の検証を無視する。
+            '/api': {
+                target: 'https://localhost:5001',
+                changeOrigin: true,
+                secure: false,
+            },
+        },
     },
 });

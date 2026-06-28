@@ -24,7 +24,18 @@ export class HttpError extends Error {
 }
 
 /** ベースURL（末尾スラッシュを保証する） */
-const baseUrl = env.apiUrl.endsWith('/') ? env.apiUrl : `${env.apiUrl}/`
+function resolveBaseUrl(apiUrl: string): string {
+  const withSlash = apiUrl.endsWith('/') ? apiUrl : `${apiUrl}/`
+  // 絶対URL（http/https）はそのまま、相対指定は現在のオリジンを基準に解決する
+  //（開発時の Vite プロキシ利用で VITE_API_URL='/' を許容するため）
+  if (/^https?:\/\//.test(withSlash)) {
+    return withSlash
+  }
+  return new URL(withSlash, window.location.origin).toString()
+}
+
+/** ベースURL（末尾スラッシュ付き） */
+const baseUrl = resolveBaseUrl(env.apiUrl || '/')
 
 /** path とクエリパラメータから完全な URL を組み立てる */
 function buildUrl(path: string, params?: Record<string, ParamValue>): string {

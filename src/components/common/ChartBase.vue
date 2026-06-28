@@ -42,6 +42,11 @@ defineExpose({ chart: chartInstance })
 
 <template>
   <div ref="containerRef" class="h-full w-full">
-    <Chart :options="mergedOptions" :callback="onChartCreated" :highcharts="Highcharts" />
+    <Chart
+      class="h-full w-full"
+      :options="mergedOptions"
+      :callback="onChartCreated"
+      :highcharts="Highcharts"
+    />
   </div>
 </template>

@@ -57,6 +57,85 @@ const router = createRouter({
           ],
         },
         {
+          path: 'aquarium',
+          component: () => import('@/pages/aquarium/AquariumPage.vue'),
+          children: [
+            {
+              path: '',
+              name: 'aquarium',
+              component: () => import('@/pages/aquarium/AquariumTopPage.vue'),
+            },
+            {
+              path: 'past',
+              name: 'aquarium-past',
+              component: () => import('@/pages/aquarium/AquariumPastPage.vue'),
+            },
+          ],
+        },
+        {
+          path: 'electric-power',
+          component: () => import('@/pages/electric-power/ElectricPowerPage.vue'),
+          children: [
+            {
+              path: '',
+              name: 'electric-power',
+              component: () => import('@/pages/electric-power/ElectricPowerTopPage.vue'),
+            },
+            {
+              path: 'past',
+              name: 'electric-power-past',
+              component: () => import('@/pages/electric-power/ElectricPowerPastPage.vue'),
+            },
+          ],
+        },
+        {
+          path: 'palmie',
+          component: () => import('@/pages/palmie/PalmiePage.vue'),
+          children: [
+            {
+              path: '',
+              name: 'palmie',
+              component: () => import('@/pages/palmie/PalmieTopPage.vue'),
+            },
+            {
+              path: ':id',
+              name: 'palmie-course',
+              component: () => import('@/pages/palmie/PalmieCoursePage.vue'),
+            },
+          ],
+        },
+        {
+          path: 'financial',
+          component: () => import('@/pages/financial/FinancialPage.vue'),
+          children: [
+            {
+              path: '',
+              name: 'financial',
+              component: () => import('@/pages/financial/FinancialTopPage.vue'),
+            },
+            {
+              path: 'asset',
+              name: 'financial-asset',
+              component: () => import('@/pages/financial/AssetPage.vue'),
+            },
+            {
+              path: 'expense',
+              name: 'financial-expense',
+              component: () => import('@/pages/financial/ExpensePage.vue'),
+            },
+            {
+              path: 'income',
+              name: 'financial-income',
+              component: () => import('@/pages/financial/IncomePage.vue'),
+            },
+            {
+              path: 'investment',
+              name: 'financial-investment',
+              component: () => import('@/pages/financial/InvestmentPage.vue'),
+            },
+          ],
+        },
+        {
           path: 'settings',
           name: 'settings',
           component: () => import('@/pages/settings/SettingsPage.vue'),

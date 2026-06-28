@@ -31,6 +31,8 @@ export interface TradingAccountDetailAmount {
   date: Date
   amount: number
   price: number
+  /** 現在価格（API が返す最新レート。損益計算に利用） */
+  latestRate: number
 }
 
 /** 取引口座カテゴリ別の保有量 */
