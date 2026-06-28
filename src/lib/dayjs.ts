@@ -12,4 +12,12 @@ dayjs.extend(isSameOrBefore)
 dayjs.extend(isSameOrAfter)
 dayjs.locale('ja')
 
+/**
+ * 日時を指定フォーマットで整形する。
+ * Angular 版 `datetimeFormatPipe`（moment ベース）の dayjs 置き換え。
+ */
+export function formatDateTime(value: string | number | Date, format: string): string {
+  return dayjs(value).format(format)
+}
+
 export default dayjs

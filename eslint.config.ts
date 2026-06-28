@@ -19,4 +19,12 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   skipFormatting,
+
+  {
+    name: 'app/component-name-overrides',
+    rules: {
+      // 汎用パネルなど、意図的に単語1つの共通コンポーネント名を許可する
+      'vue/multi-word-component-names': ['error', { ignores: ['Panel'] }],
+    },
+  },
 )
