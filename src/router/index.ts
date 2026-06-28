@@ -12,7 +12,7 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          // フェーズ 2 以降で DashboardTop / 各機能ページに差し替える。
+          // ダッシュボード TOP（Angular 版 dashboard-top 相当）。
           component: () => import('@/pages/HomePage.vue'),
         },
         {
