@@ -16,7 +16,7 @@
 - **アイコン**: lucide-vue-next
 - **グラフ**: Highcharts 11 + highcharts-vue
 - **リアルタイム通信**: @microsoft/signalr（Hub: `api/hubs/dashboard-hub`）
-- **HTTP クライアント**: axios
+- **HTTP クライアント**: ブラウザ標準の `fetch`（薄いラッパー `src/lib/http.ts` 経由）
 - **日時処理**: dayjs
 - **ユーティリティ**: VueUse
 
@@ -29,7 +29,7 @@
 - `src/composables/`: 再利用ロジック（`useSignalR`, `useDateRange` など）。Angular のサービス/基底クラス相当のロジックはここへ。
 - `src/services/`: REST API 呼び出しモジュール。機能ごとに分割（`aquarium`, `financial`, `network` 等）。
 - `src/models/`: 型定義。Angular 版の `models/*.ts` を移植する。
-- `src/lib/`: 横断的な設定（axios インスタンス, dayjs, Highcharts 既定オプション）。
+- `src/lib/`: 横断的な設定（`http`（fetch ラッパー）, dayjs, Highcharts 既定オプション）。
 - `src/config/`: 環境変数のラッパー（`apiUrl` 等）。
 - `src/components/ui/`: shadcn-vue が生成する UI コンポーネント（**手動で大きく改変しない**）。
 - `src/components/layout/`: `AppLayout`, `AppSidebar` などレイアウト。
@@ -44,7 +44,7 @@
 - **購読・リソースの解放**: SignalR の `on`/`off`、`ResizeObserver`、タイマー等は必ず `onUnmounted` で解放すること。可能な限り VueUse（`useResizeObserver` 等）を使い、解放漏れを防ぐ。
 - **UI ライブラリの優先**: UI 要素は可能な限り shadcn-vue のコンポーネントを使う。独自実装やインライン CSS よりも Tailwind ユーティリティクラスを優先する。
 - **日時処理は dayjs に統一**: `moment` は使用しない。日付範囲のプリセット（今月/先月/今年 等）は `DateRangeSelector` に集約する。
-- **API 呼び出し**: 直接 `axios` をコンポーネントで叩かず、`src/services/` のモジュールを経由すること。エンドポイント URL は Angular 版の `*-api.service.ts` と照合して移植する。
+- **API 呼び出し**: 直接 `fetch` をコンポーネントで叩かず、`src/services/` のモジュール（内部で `src/lib/http.ts` を利用）を経由すること。エンドポイント URL は Angular 版の `*-api.service.ts` と照合して移植する。
 - **環境変数**: API の URL 等のハードコードは禁止。`.env`（`VITE_API_URL`, `VITE_PALMIE_VIDEO_URL`, `VITE_PALMIE_DOCUMENTS_URL`, `VITE_KWH_PRICE` 等）で管理し、`src/config/` 経由で参照する。
 - **型安全**: `any` の使用は最小限に留め、`src/models/` の型を活用する。
 - **Highcharts**: チャートの既定オプションは `src/lib/highcharts.ts` に集約し、各チャートで共有する。リアルタイム追記は `ChartBase` のラッパー越しに行う。

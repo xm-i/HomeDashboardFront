@@ -60,7 +60,7 @@ UI ライブラリは ng-zorro へのこだわりが無いため、**shadcn-vue 
 | UI | ng-zorro-antd | **shadcn-vue + Tailwind CSS**（ダークテーマ） |
 | アイコン | ant-design icons | **lucide-vue-next** |
 | グラフ | angular-highcharts | **highcharts-vue**（Highcharts 本体は継続利用） |
-| HTTP | HttpClient | **axios**（＋必要に応じ `@tanstack/vue-query`） |
+| HTTP | HttpClient | **fetch**（ブラウザ標準。薄いラッパーで集約、必要に応じ `@tanstack/vue-query`） |
 | リアルタイム | @microsoft/signalr | **@microsoft/signalr（そのまま流用可）** |
 | 日時 | moment | **dayjs**（API 互換が高く移植容易） |
 | リサイズ検知 | angular-resize-event | **VueUse `useResizeObserver`** |
@@ -92,7 +92,7 @@ HomeDashboardFront/                 ← Vue プロジェクトのルート
     router/index.ts
     stores/                         ← Pinia（dashboard / settings 等）
     composables/                    ← useSignalR, useApi, useDateRange ...
-    lib/                            ← axios インスタンス, dayjs, highcharts 設定
+    lib/                            ← http(fetch ラッパー), dayjs, highcharts 設定
     config/env.ts                   ← apiUrl 等（.env で管理）
     components/
       ui/                           ← shadcn-vue 生成コンポーネント
@@ -116,7 +116,7 @@ HomeDashboardFront/                 ← Vue プロジェクトのルート
 2. Tailwind CSS + shadcn-vue 初期化（ダークテーマ既定）
 3. Vue Router / Pinia 導入
 4. `.env`（`VITE_API_URL`, `VITE_PALMIE_VIDEO_URL` 等）で環境変数化
-5. axios インスタンス・dayjs・Highcharts のラッパー作成
+5. fetch ラッパー・dayjs・Highcharts のラッパー作成
 
 ### フェーズ 1: 共通基盤の移植
 1. `models/*` をコピー移植（型のみなので低リスク）
@@ -171,7 +171,7 @@ HomeDashboardFront/                 ← Vue プロジェクトのルート
 
 ## 7. 次のアクション（着手候補）
 
-- [ ] フェーズ 0 の Vite + Vue + Tailwind + shadcn-vue プロジェクト雛形を `HomeDashboardFront/` に生成
+- [x] フェーズ 0 の Vite + Vue + Tailwind + shadcn-vue プロジェクト雛形を `HomeDashboardFront/` に生成
 - [ ] `models/` と `highcharts.options.ts` の移植
 - [ ] `useSignalR` Composable と `AppLayout`/`AppSidebar` の実装
 - [ ] 最小ページ（Links）で疎通確認

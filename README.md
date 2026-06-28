@@ -23,7 +23,7 @@ Angular 17 製の既存実装（`HomeDashboardFront-Angular`）を **Vue 3 へ�
 | アイコン | lucide-vue-next |
 | グラフ | Highcharts 11 + highcharts-vue |
 | リアルタイム | @microsoft/signalr |
-| HTTP | axios |
+| HTTP | fetch（標準 API） |
 | 日時 | dayjs |
 | ユーティリティ | VueUse |
 
@@ -76,7 +76,7 @@ src/
   composables/            # useSignalR, useDateRange など
   services/               # REST API 呼び出しモジュール
   models/                 # 型定義
-  lib/                    # axios / dayjs / Highcharts 設定
+  lib/                    # http(fetch ラッパー) / dayjs / Highcharts 設定
   config/                 # 環境変数ラッパー
   components/
     ui/                   # shadcn-vue コンポーネント
