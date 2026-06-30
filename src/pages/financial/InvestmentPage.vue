@@ -353,7 +353,7 @@ onMounted(async () => {
     <template v-if="viewType === 'product'">
       <div class="flex flex-wrap items-center justify-between gap-4">
         <Button @click="addProductModalVisible = true">投資商品追加</Button>
-        <div class="flex flex-wrap gap-4 text-sm">
+        <div class="flex flex-col gap-1 text-sm">
           <div>
             収益額:
             <ValueDisplay :value="totalProfit ?? NaN" :investment-currency-unit="yenCurrency" />
@@ -469,7 +469,7 @@ onMounted(async () => {
               :title="selectedAccount.tradingAccountName"
               class="max-h-[60px] max-w-[200px]"
             />
-            <div class="flex flex-wrap gap-4 text-sm">
+            <div class="flex flex-col gap-1 text-sm">
               <div>
                 収益額:
                 <ValueDisplay :value="selectedAccount.totalProfit" :investment-currency-unit="yenCurrency" />
