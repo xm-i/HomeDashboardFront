@@ -42,8 +42,8 @@ cp .env.example .env
 | 変数名 | 説明 | 例 |
 | --- | --- | --- |
 | `VITE_API_URL` | バックエンド API のベース URL | `https://localhost:5001/` |
-| `VITE_PALMIE_VIDEO_URL` | パルミー動画の URL | `http://palmiecdn.nas.localnet/Videos/` |
-| `VITE_PALMIE_DOCUMENTS_URL` | パルミー資料の URL | `http://palmiecdn.nas.localnet/Documents/` |
+| `VITE_PALMIE_VIDEO_URL` | パルミー動画の URL | `http://palmiecdn.nas.internal/Videos/` |
+| `VITE_PALMIE_DOCUMENTS_URL` | パルミー資料の URL | `http://palmiecdn.nas.internal/Documents/` |
 | `VITE_KWH_PRICE` | 電気料金単価（円/kWh） | `30.57` |
 
 ## 開発

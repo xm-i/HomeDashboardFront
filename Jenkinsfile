@@ -21,7 +21,7 @@ node {
           keyFileVariable: 'SSH_KEY', \
           usernameVariable: 'SSH_USER')]) {
       stage('Deploy'){
-          sh 'scp -pr -i ${SSH_KEY} ./dist/* ${SSH_USER}@home-server.localnet:/var/www/html/dashboard'
+          sh 'scp -pr -i ${SSH_KEY} ./dist/* ${SSH_USER}@home-server.internal:/var/www/html/dashboard'
       }
     }
 

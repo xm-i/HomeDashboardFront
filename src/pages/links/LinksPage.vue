@@ -6,8 +6,8 @@ import Panel from '@/components/common/Panel.vue'
  * Angular 版 `LinksComponent` のハードコードされたリンクをそのまま移植する。
  */
 const links: { label: string; url: string }[] = [
-  { label: 'jenkins', url: '//jenkins.home-server.localnet/' },
-  { label: 'ZABBIX', url: '//zabbix.home-server.localnet/' },
+  { label: 'jenkins', url: '//jenkins.home-server.internal/' },
+  { label: 'ZABBIX', url: '//zabbix.home-server.internal/' },
 ]
 </script>
 
