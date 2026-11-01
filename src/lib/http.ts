@@ -23,8 +23,13 @@ export class HttpError extends Error {
   }
 }
 
-/** ベースURL（末尾スラッシュを保証する） */
-function resolveBaseUrl(apiUrl: string): string {
+/**
+ * ベースURLを正規化する（末尾スラッシュを保証し、相対URLやプロトコル相対URLを現在のオリジンに合わせて解決する）。
+ * - `http://...` や `https://...` の絶対URLはそのまま返す
+ * - `//...` のプロトコル相対URLは、現在のオリジンのプロトコル（http/https）を適用して完全なURLにする
+ * - `/...` の相対パスは、現在のオリジンを基準に完全なURLにする
+ */
+export function resolveBaseUrl(apiUrl: string): string {
   const withSlash = apiUrl.endsWith('/') ? apiUrl : `${apiUrl}/`
   // 絶対URL（http/https）はそのまま、相対指定は現在のオリジンを基準に解決する
   //（開発時の Vite プロキシ利用で VITE_API_URL='/' を許容するため）

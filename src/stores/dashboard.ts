@@ -2,6 +2,7 @@ import { ref, shallowRef } from 'vue'
 import { defineStore } from 'pinia'
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr'
 import { env } from '@/config/env'
+import { resolveBaseUrl } from '@/lib/http'
 
 /**
  * ダッシュボード全体のグローバル状態を管理するストア。
@@ -18,10 +19,10 @@ export const useDashboardStore = defineStore('dashboard', () => {
   /** 現在の接続状態 */
   const connectionState = ref<HubConnectionState>(HubConnectionState.Disconnected)
 
-  /** Hub 接続の URL を組み立てる（apiUrl の末尾スラッシュ有無を吸収する） */
+  /** Hub 接続の URL を組み立てる（プロトコル相対URLや相対パスを解決する） */
   function buildHubUrl(): string {
-    const baseUrl = env.apiUrl.endsWith('/') ? env.apiUrl : `${env.apiUrl}/`
-    return `${baseUrl}api/hubs/dashboard-hub`
+    const baseUrl = resolveBaseUrl(env.apiUrl || '/')
+    return new URL('api/hubs/dashboard-hub', baseUrl).toString()
   }
 
   /**
