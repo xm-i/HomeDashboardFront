@@ -25,12 +25,12 @@ const categories: LinkCategory[] = [
   {
     title: 'Web サービス',
     items: [
-      { title: 'ホームダッシュボード', url: 'https://dashboard.home-server.internal/' },
-      { title: 'Jenkins', url: 'https://jenkins.home-server.internal/' },
-      { title: 'Grafana', url: 'https://monitor.home-server.internal/' },
-      { title: 'EPGStation', url: 'https://recorder.home-server.internal/' },
-      { title: 'Rundeck', url: 'https://rundeck.home-server.internal/' },
-      { title: 'Pinpon', url: 'https://pinpon.home-server.internal/' },
+      { title: 'ホームダッシュボード', url: 'https://dashboard.home.internal/' },
+      { title: 'Jenkins', url: 'https://jenkins.home.internal/' },
+      { title: 'Grafana', url: 'https://monitor.home.internal/' },
+      { title: 'EPGStation', url: 'https://recorder.home.internal/' },
+      { title: 'Rundeck', url: 'https://rundeck.home.internal/' },
+      { title: 'Pinpon', url: 'https://pinpon.home.internal/' },
     ],
   },
   {
