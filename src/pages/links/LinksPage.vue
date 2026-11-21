@@ -31,6 +31,7 @@ const categories: LinkCategory[] = [
       { title: 'EPGStation', url: 'https://recorder.home.internal/' },
       { title: 'Rundeck', url: 'https://rundeck.home.internal/' },
       { title: 'Pinpon', url: 'https://pinpon.home.internal/' },
+      { title: 'SonarQube', url: 'https://sonarqube.home.internal/' },
     ],
   },
   {
